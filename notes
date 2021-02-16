@@ -20,3 +20,9 @@ rule, it must be removed and then re-added. To remove the claim rule, issue the 
 esxcli storage nmp satp rule remove --vendor "DellEMC" --model "ME4" --satp
 "VMW_SATP_ALUA" --psp "VMW_PSP_RR" --psp-option "iops=3" --claimoption="tpgs_on"
 A reboot is required for claim rule changes to take effect
+
+
+https://dl.dell.com/topicspdf/powervault-me4-dg_en-us.pdf
+
+https://downloads.dell.com/manuals/common/powervault-me4-series-vmware-vsphere-dell-emc-2018-3922-bp-vm_wp2_en-us.pdf
+
