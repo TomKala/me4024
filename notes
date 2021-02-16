@@ -1,0 +1,22 @@
+• When powering up, ensure to power up the enclosures and associated data host in the following order:
+○ Drive enclosures first – Ensures that the disks in the drive enclosure have enough time to completely spin up before being scanned
+by the controller modules within the controller enclosure. The LEDs blink while the enclosures power up. After the LEDs stop
+blinking – if the LEDs on the front and back of the enclosure are not amber – the power-on sequence is complete, and no faults
+have been detected.
+○ Controller enclosure next – Depending upon the number and type of disks in the system, it may take several minutes for the
+system to become ready.
+○ Data host last (if powered off for maintenance purposes).
+
+Modify SATP claim rule
+Modifying the SATP claim rule is advantageous because it will apply to all current and future datastores that
+are added to the ESXi host, but it requires a reboot to be applied. Once the rule is created and a reboot
+occurs, all current, and future datastores will have the recommended setting applied to them.
+To automatically set multipathing to round robin, and set the IOPS path change condition for all current and
+future volumes mapped to an ESXi host, create a claim rule with the following command:
+esxcli storage nmp satp rule add --vendor "DellEMC" --model "ME4" --satp
+"VMW_SATP_ALUA" --psp "VMW_PSP_RR" --psp-option "iops=3" --claimoption="tpgs_on"
+SATP claim rules cannot be edited; they can only be added or removed. To make changes to an SATP claim
+rule, it must be removed and then re-added. To remove the claim rule, issue the following command:
+esxcli storage nmp satp rule remove --vendor "DellEMC" --model "ME4" --satp
+"VMW_SATP_ALUA" --psp "VMW_PSP_RR" --psp-option "iops=3" --claimoption="tpgs_on"
+A reboot is required for claim rule changes to take effect
